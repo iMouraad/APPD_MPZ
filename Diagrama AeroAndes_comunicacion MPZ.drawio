@@ -55,7 +55,7 @@
         <mxCell id="kio" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;" value="&lt;b&gt;Quioscos de autoservicio&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="80" width="220" x="430" y="950" as="geometry" />
         </mxCell>
-        <mxCell id="lec" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;" value="&lt;b&gt;Lectores de puerta&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;&lt;/font&gt;" vertex="1">
+        <mxCell id="lec" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;" value="&lt;b&gt;Lectores de puerta&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;40 lectores simultáneos&lt;/font&gt;" vertex="1">
           <mxGeometry height="80" width="200" x="1060" y="950" as="geometry" />
         </mxCell>
         <mxCell id="per" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontColor=#000000;" value="Personal de aeropuerto" vertex="1">
@@ -147,7 +147,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e22" edge="1" parent="1" source="not" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;" target="prv" value="I12 · SMTP / HTTPS · asíncrona&lt;br&gt;correo y SMS con el pase">
+        <mxCell id="e22" edge="1" parent="1" source="not" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;" target="prv" value="I12 · SMTP / HTTPS · síncrona&lt;br&gt;correo y SMS con el pase&lt;br&gt;(envío en segundo plano)">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="-22" as="offset" />
           </mxGeometry>
@@ -178,6 +178,15 @@
               <mxPoint x="540" y="867" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="mpz-titulo" parent="1" vertex="1" value="&lt;b&gt;AeroAndes Reservas:&lt;/b&gt; diagrama de comunicación entre procesos distribuidos" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=23;">
+          <mxGeometry x="20" y="12" width="1960" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="mpz-equipo" parent="1" vertex="1" value="FORM-TL-01 · Aplicaciones Distribuidas · Equipo MPZ: Muñoz Vera Melanie, Pozo Castillo Steven, Zambrano Yong Angel" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=15;">
+          <mxGeometry x="20" y="47" width="1960" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="mpz-leyenda" parent="1" vertex="1" value="&lt;b&gt;LEYENDA&lt;/b&gt;&lt;br&gt;━━━━ Línea continua: comunicación síncrona&lt;br&gt;- - - - Línea punteada: comunicación asíncrona (AMQP con RabbitMQ)&lt;br&gt;&lt;b&gt;━━━━&lt;/b&gt; Línea gruesa: Socket TCP&lt;br&gt;Cada flecha indica: ID (I1 a I16), tipo, protocolo, sincronía y datos que viajan&lt;br&gt;Rectángulo redondeado: servicio o proceso propio&lt;br&gt;Rectángulo punteado: sistema externo&lt;br&gt;Rectángulo recto: dispositivo del aeropuerto&lt;br&gt;Cilindro: base de datos · Actor: persona que usa el sistema&lt;br&gt;Recuadros grandes punteados: fronteras del sistema" style="rounded=0;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacing=13;fontSize=13;strokeColor=#64748b;fillColor=#ffffff;fontColor=#000000;">
+          <mxGeometry x="1450" y="730" width="530" height="260" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
