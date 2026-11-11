@@ -1,0 +1,185 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="EFOdyekQCikHv2gvB7qy">
+    <mxGraphModel dx="2150" dy="1078" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z1" parent="1" style="rounded=1;arcSize=2;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontStyle=1;fontSize=13;html=1;fontColor=#000000;" value="Clientes y canales de venta" vertex="1">
+          <mxGeometry height="610" width="330" x="20" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="z2" parent="1" style="rounded=1;arcSize=2;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontStyle=1;fontSize=13;html=1;fontColor=#000000;" value="Centro de datos AeroAndes" vertex="1">
+          <mxGeometry height="630" width="960" x="380" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="z3" parent="1" style="rounded=1;arcSize=2;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontStyle=1;fontSize=13;html=1;fontColor=#000000;" value="Sistemas externos" vertex="1">
+          <mxGeometry height="610" width="600" x="1380" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="z4" parent="1" style="rounded=1;arcSize=2;dashed=1;dashPattern=8 4;strokeWidth=2;fillColor=#f8fafc;strokeColor=#64748b;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontStyle=1;fontSize=13;html=1;fontColor=#000000;" value="Aeropuerto (red local de embarque)" vertex="1">
+          <mxGeometry height="330" width="1040" x="380" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="pas" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontColor=#000000;" value="Pasajero" vertex="1">
+          <mxGeometry height="55" width="30" x="165" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cli" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Cliente&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;app móvil o web&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="290" x="40" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="age" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Agencia de viajes&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;sistema propio de la agencia&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="290" x="40" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="res" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Servicio de reservas&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;recibe solicitudes y coordina la operación&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="240" x="430" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="inv" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;br&gt;&lt;b&gt;Servicio de inventario de asientos&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="760" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bd" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;BD de reservas&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;reservas y asientos&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="170" x="1090" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="pag" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Servicio de pagos&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;habla con la pasarela externa&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="240" x="400" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="mq" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Broker RabbitMQ&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;colas durables y topics&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="240" x="830" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="not" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Servicio de notificaciones&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;confirmación y pase de abordar&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="1150" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="psg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Pasarela de pagos&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;puede tardar hasta 30 s (R4)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="310" x="1630" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="prv" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Proveedor de correo y SMS&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="310" x="1630" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="emb" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;fontColor=#000000;" value="&lt;b&gt;Servidor de embarque&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;copia local del manifiesto del vuelo&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="240" x="760" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="kio" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;" value="&lt;b&gt;Quioscos de autoservicio&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="220" x="430" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="lec" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=12;" value="&lt;b&gt;Lectores de puerta&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="1060" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="per" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontColor=#000000;" value="Personal de aeropuerto" vertex="1">
+          <mxGeometry height="55" width="30" x="1340" y="962.5" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" edge="1" parent="1" source="pas" style="endArrow=none;html=1;fontColor=#000000;" target="cli">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" edge="1" parent="1" source="per" style="endArrow=none;html=1;strokeColor=#9e9e9e;fontColor=#000000;" target="lec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="cli" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="res" value="I1 · REST/HTTPS · síncrona&lt;br&gt;buscar vuelos, retener, pagar,&lt;br&gt;consultar estado">
+          <mxGeometry relative="1" x="-0.1743" y="-12" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="age" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="res" value="I2 · REST/HTTPS · síncrona&lt;br&gt;solicitud de reserva">
+          <mxGeometry relative="1" x="-0.4917" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="185" y="590" />
+              <mxPoint x="400" y="590" />
+              <mxPoint x="400" y="412.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="res" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="inv" value="I3 · RPC gRPC (HTTP/2) · síncrona&lt;br&gt;Consultar / Retener / Confirmar asiento">
+          <mxGeometry relative="1" x="0.3333" y="20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="550" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="inv" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="bd" value="I4 · SQL/TCP&lt;br&gt;síncrona">
+          <mxGeometry relative="1" x="-0.0909" y="20" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="res" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.15;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="bd" value="I5 · SQL/TCP · síncrona · guarda la reserva y su estado">
+          <mxGeometry relative="1" x="0.0011" as="geometry">
+            <mxPoint x="80" y="-10" as="offset" />
+            <Array as="points">
+              <mxPoint x="466" y="128" />
+              <mxPoint x="1175" y="128" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="res" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="pag" value="I6 · RPC gRPC · síncrona (≤ 2 s)&lt;br&gt;IniciarPago(reserva, monto, clave)">
+          <mxGeometry relative="1" x="-0.6842" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="pag" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;" target="psg" value="I7 · REST/HTTPS · síncrona, timeout 30 s ·&lt;div&gt;cobro con clave idempotente&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.7692" y="20" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="pag" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.15;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="mq" value="I8 · AMQP · asíncrona&lt;br&gt;pago.aprobado / pago.rechazado">
+          <mxGeometry relative="1" x="-0.4802" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="720" y="615" />
+              <mxPoint x="720" y="362.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="mq" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.657;entryY=-0.021;entryDx=0;entryDy=0;entryPerimeter=0;" target="res" value="I9 · AMQP · asíncrona&lt;br&gt;eventos de pago">
+          <mxGeometry relative="1" x="0.0961" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="890" y="290" />
+              <mxPoint x="587.7" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="res" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="mq" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;I10 · AMQP · asíncrona&lt;br&gt;reserva.confirmada, pase.emitido&lt;/font&gt;">
+          <mxGeometry relative="1" x="-0.2558" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="550" y="520" />
+              <mxPoint x="780" y="520" />
+              <mxPoint x="780" y="417.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="mq" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="not" value="I11 · AMQP&lt;br&gt;asíncrona">
+          <mxGeometry relative="1" x="-0.0909" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="not" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;" target="prv" value="I12 · SMTP / HTTPS · asíncrona&lt;br&gt;correo y SMS con el pase">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="mq" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.54;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="emb" value="I13 · AMQP · asíncrona&lt;br&gt;pase.emitido (manifiesto)">
+          <mxGeometry relative="1" x="0.3972" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="emb" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="mq" value="I14 · AMQP · asíncrona&lt;br&gt;embarque.registrado (store and forward)">
+          <mxGeometry relative="1" x="0.4878" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1010" y="845" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="lec" style="strokeWidth=3;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="emb" value="I15 · Socket TCP · síncrona (&amp;lt; 1 s)&lt;br&gt;RES|VUELO|ASIENTO → VALIDO / INVALIDO">
+          <mxGeometry relative="1" x="-0.0922" y="-22" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="kio" style="strokeWidth=3;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" target="emb" value="I16 · Socket TCP · síncrona&lt;br&gt;validar pase / check-in">
+          <mxGeometry relative="1" x="0.2079" y="22" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="540" y="867" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
