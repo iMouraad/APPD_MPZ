@@ -1,4 +1,4 @@
-# FORM-TL-01: Taller de modelado de comunicación entre procesos distribuidos
+  # FORM-TL-01: Taller de modelado de comunicación entre procesos distribuidos
 
 Universidad Técnica Estatal de Quevedo (UTEQ) · Carrera de Software
 
@@ -20,15 +20,15 @@ Semana 2 · Entrega: 11/11/2026
 
 | Archivo | Descripción |
 |---|---|
-| `AeroAndes_comunicacion.drawio` | Diagrama editable de comunicación entre procesos (draw.io) |
-| `AeroAndes_comunicacion.pdf` | Exportación del diagrama en PDF |
-| `AeroAndes_comunicacion.png` | Exportación del diagrama en PNG a 300 DPI |
+| `Diagrama AeroAndes_comunicacion MPZ.drawio` | Diagrama editable de comunicación entre procesos (draw.io) |
+| `Diagrama AeroAndes_comunicacion MPZ.pdf` | Exportación del diagrama en PDF |
+| `Diagrama AeroAndes_comunicacion MPZ.png` | Exportación del diagrama en PNG a 300 DPI |
 | `notas/notas.tex` | Notas de la presentación en LaTeX, con las preguntas recibidas y las respuestas |
 | `notas/notas.pdf` | Notas compiladas |
 
 ## Cómo abrir el diagrama
 
-Abrir `AeroAndes_comunicacion.drawio` en https://app.diagrams.net o en draw.io Desktop (File → Open).
+Abrir `Diagrama AeroAndes_comunicacion MPZ.drawio` en https://app.diagrams.net o en draw.io Desktop (File → Open).
 
 Para exportarlo de nuevo: File → Export as → PNG (Zoom 313 %, que equivale a unos 300 DPI) o File → Export as → PDF.
 
