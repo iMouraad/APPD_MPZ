@@ -105,5 +105,26 @@ I16 & Quioscos \flecha{} Embarque. Validar pase o hacer \textit{check-in}.
 \end{longtable}
 }
 
+\clearpage
+\section*{Respuestas a las situaciones de fallo}
+
+\subsection*{F1. La pasarela de pagos no responde}
+
+El cliente ve \textbf{«Pago en verificación»}. Si se agotan los 30 segundos de I7, todavía puede haber un cobro. Quizá la pasarela lo procesó y se perdió la respuesta. Pagos consulta el mismo intento cuando el proveedor lo permita.
+
+Si pasan los 10 minutos sin que se confirme la reserva, el asiento se libera. Si después se comprueba que sí hubo un cobro, se tramita el reembolso y se informa al cliente del estado.
+
+\subsection*{F2. Notificaciones está caído cuando se confirma la reserva}
+
+La reserva queda confirmada en la base de datos y el aviso queda pendiente. Para cubrir una caída entre guardar la confirmación en I5 y publicar en I10, proponemos guardar el evento pendiente en la misma transacción que registra la reserva confirmada.
+
+Una vez publicado, RabbitMQ lo conserva en una cola durable hasta que Notificaciones lo procese. Si la caída se prolonga, el aviso puede superar el minuto.
+
+\subsection*{F3. Se corta la conexión entre el aeropuerto y el centro de datos}
+
+Los lectores y quioscos siguen consultando al servidor de Embarque por la red local. El servidor valida con el manifiesto que recibió por I13 y registra cada uso localmente para evitar que el mismo pase se acepte dos veces.
+
+Los pases nuevos y los cambios que aún no llegaron requieren revisión manual. Cuando vuelve la conexión, Embarque publica los usos pendientes por I14 y recibe las actualizaciones del manifiesto.
+
 {\small\printbibliography[title={Referencias}]}
 \end{document}
