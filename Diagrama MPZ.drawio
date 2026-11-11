@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="jeDuDSprdMuA4pBYwhVI">
+    <mxGraphModel dx="1817" dy="1081" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-1" parent="1" style="swimlane;startSize=0;" value="" vertex="1">
+          <mxGeometry height="380" width="400" x="-500" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-2" parent="zsEfAI6Q-FvR6mlNY9bw-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="CLIENTES Y CANALES DE VENTA" vertex="1">
+          <mxGeometry height="30" width="220" x="-10" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-3" parent="1" style="swimlane;startSize=0;" value="" vertex="1">
+          <mxGeometry height="380" width="400" x="-70" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-4" parent="zsEfAI6Q-FvR6mlNY9bw-3" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="CENTRO DE DATOS AeroAndes" vertex="1">
+          <mxGeometry height="30" width="220" x="-10" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-5" parent="1" style="swimlane;startSize=0;" value="" vertex="1">
+          <mxGeometry height="380" width="400" x="-330" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-6" parent="zsEfAI6Q-FvR6mlNY9bw-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Aeropuerto (red local de embarque)" vertex="1">
+          <mxGeometry height="30" width="220" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-7" parent="1" style="swimlane;startSize=0;" value="" vertex="1">
+          <mxGeometry height="380" width="400" x="110" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="zsEfAI6Q-FvR6mlNY9bw-8" parent="zsEfAI6Q-FvR6mlNY9bw-7" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="SISTEMAS EXTERNOS" vertex="1">
+          <mxGeometry height="30" width="220" x="-10" y="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
