@@ -109,6 +109,8 @@ Después de cada fallo no basta con que el servicio vuelva a responder. El equip
 
 Elegir una o dos según el escenario presentado; no hacerlas todas.
 
+Antes de preguntar, mencionar el componente o requisito observado en la exposición. La pregunta debe pedir una decisión técnica concreta y no repetir información que el equipo ya explicó. Después se anotará una síntesis de la respuesta para comparar enfoques entre grupos.
+
 \begin{enumerate}[leftmargin=*,itemsep=5pt]
   \item \textbf{Consistencia:} Si dos solicitudes intentan modificar el mismo recurso al mismo tiempo, ¿qué componente toma la decisión final y cómo evita un resultado duplicado?
   \item \textbf{Tiempo de espera:} ¿Dónde definen los \textit{timeouts} y qué estado ve el usuario cuando vence el tiempo pero la operación externa podría seguir ejecutándose?
@@ -117,6 +119,8 @@ Elegir una o dos según el escenario presentado; no hacerlas todas.
   \item \textbf{Medición:} ¿Desde qué punto hasta qué punto miden la latencia indicada en su requisito, y cómo la comprobarían bajo carga?
   \item \textbf{Recuperación:} Cuando vuelve la conexión después de operar sin red, ¿cómo resuelven conflictos entre los datos locales y los del servidor central?
 \end{enumerate}
+
+\textbf{Registro recomendado:} equipo consultado, pregunta elegida, respuesta principal y una diferencia con la solución de AeroAndes.
 
 \begin{thebibliography}{9}
 
