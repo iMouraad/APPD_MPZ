@@ -21,14 +21,14 @@
 
 \begin{document}
 \begin{center}
-{\LARGE\textbf{AeroAndes Reservas: notas de presentación}\par}
+{\LARGE\textbf{AeroAndes Reservas: diseño de comunicación entre procesos}\par}
 \end{center}
 
 \begin{center}
 \small Repositorio del equipo: \url{https://github.com/iMouraad/APPD_MPZ}
 \end{center}
 
-\section*{Objetivo de mi intervención}
+\section*{Objetivo del documento}
 
 Explicar cómo el diseño de AeroAndes combina comunicación síncrona y asíncrona para evitar la sobreventa de asientos, procesar pagos que pueden tardar hasta 30 segundos, enviar notificaciones y mantener el embarque durante una desconexión. Los sistemas de reserva aérea dependen de componentes de cómputo, redes y terminales que deben responder a transacciones en línea \cite{airline-reservations}; por eso el diagrama separa claramente los canales de venta, el centro de datos, los sistemas externos y la red local del aeropuerto.
 
@@ -169,53 +169,10 @@ Los pases nuevos y los cambios que aún no llegaron requieren revisión manual. 
 
 Después de cada fallo no basta con que el servicio vuelva a responder. El equipo debe verificar que no existan cobros duplicados, que ningún asiento liberado aparezca confirmado, que los eventos pendientes hayan sido consumidos y que el manifiesto local coincida nuevamente con el estado central. Estas comprobaciones convierten la recuperación en un resultado observable y no solo en el reinicio de un proceso.
 
-\section*{Preguntas que probablemente recibiremos}
-
-\begin{enumerate}[leftmargin=*,itemsep=5pt]
-  \item \textbf{¿Por qué no usar REST en todas las comunicaciones?} REST/HTTPS es adecuado en los canales externos. Entre servicios internos, gRPC ofrece contratos definidos y llamadas eficientes. Para resultados tardíos y trabajo desacoplado, RabbitMQ evita mantener abierta la petición del cliente.
-  \item \textbf{¿Cómo evitan vender el mismo asiento dos veces?} Inventario es el único responsable de cambiar el estado del asiento. La confirmación usa una transacción que comprueba la reserva propietaria y la vigencia de la retención antes de actualizar.
-  \item \textbf{¿Qué ocurre si RabbitMQ entrega un mensaje repetido?} Cada evento lleva un identificador estable. El consumidor registra qué identificadores procesó y convierte la repetición en una operación sin efecto adicional.
-  \item \textbf{¿Qué sucede si el pago se aprueba después de vencer la retención?} No se confirma otro asiento automáticamente. Se verifica la situación, se tramita el reembolso y se informa al pasajero.
-  \item \textbf{¿El aeropuerto puede validar cualquier pase durante la desconexión?} No. Solo los pases que ya estén en la copia local del manifiesto. Los nuevos o modificados requieren conectividad o revisión manual.
-  \item \textbf{¿Dónde se mide el requisito de 300 ms?} Desde que el canal envía la consulta de disponibilidad hasta que recibe la respuesta, incluyendo Reservas, Inventario y la consulta a la base de datos.
-\end{enumerate}
-
-\section*{Registro de preguntas recibidas en la exposición}
-
-\begin{longtable}{@{}P{0.7cm}P{6.8cm}P{8.2cm}@{}}
-\toprule
-\textbf{N.} & \textbf{Pregunta recibida} & \textbf{Respuesta dada o corrección pendiente} \\
-\midrule
-1 & \rule{0pt}{1.2cm} & \\
-\midrule
-2 & \rule{0pt}{1.2cm} & \\
-\midrule
-3 & \rule{0pt}{1.2cm} & \\
-\midrule
-4 & \rule{0pt}{1.2cm} & \\
-\bottomrule
-\end{longtable}
-
-\section*{Preguntas para hacer a otros equipos}
-
-Elegir una o dos según el escenario presentado; no hacerlas todas.
-
-Antes de preguntar, mencionar el componente o requisito observado en la exposición. La pregunta debe pedir una decisión técnica concreta y no repetir información que el equipo ya explicó. Después se anotará una síntesis de la respuesta para comparar enfoques entre grupos.
-
-\begin{enumerate}[leftmargin=*,itemsep=5pt]
-  \item \textbf{Consistencia:} Si dos solicitudes intentan modificar el mismo recurso al mismo tiempo, ¿qué componente toma la decisión final y cómo evita un resultado duplicado?
-  \item \textbf{Tiempo de espera:} ¿Dónde definen los \textit{timeouts} y qué estado ve el usuario cuando vence el tiempo pero la operación externa podría seguir ejecutándose?
-  \item \textbf{Mensajería:} Si el broker entrega un evento dos veces, ¿qué identificador o regla hace idempotente al consumidor?
-  \item \textbf{Fallo parcial:} ¿Qué funciones siguen disponibles cuando uno de sus servicios está caído y cuáles prefieren bloquear para no comprometer los datos?
-  \item \textbf{Medición:} ¿Desde qué punto hasta qué punto miden la latencia indicada en su requisito, y cómo la comprobarían bajo carga?
-  \item \textbf{Recuperación:} Cuando vuelve la conexión después de operar sin red, ¿cómo resuelven conflictos entre los datos locales y los del servidor central?
-\end{enumerate}
-
-\textbf{Registro recomendado:} equipo consultado, pregunta elegida, respuesta principal y una diferencia con la solución de AeroAndes.
-
+\clearpage
 \section*{Declaración de uso de inteligencia artificial}
 
-Se utilizó ChatGPT (OpenAI) como apoyo para organizar el guion, formular posibles preguntas y revisar la concordancia de las notas con el diagrama del equipo. El contenido técnico debe ser revisado y defendido por los integrantes antes de la exposición.
+Se utilizó ChatGPT (OpenAI) para organizar y revisar las notas. Se utilizó Codex (OpenAI) para preparar la tabla de interacciones y las respuestas a los fallos, verificar los enlaces de las fuentes, cotejar el texto con el diagrama e integrar los archivos en LaTeX.
 
 {\small\printbibliography[title={Referencias}]}
 

@@ -23,7 +23,7 @@ Semana 2 · Entrega: 11/11/2026
 | `Diagrama AeroAndes_comunicacion MPZ.drawio` | Diagrama editable de comunicación entre procesos (draw.io) |
 | `Diagrama AeroAndes_comunicacion MPZ.pdf` | Exportación del diagrama en PDF |
 | `Diagrama AeroAndes_comunicacion MPZ.png` | Exportación del diagrama en PNG a 300 DPI |
-| [docs/notas-presentacion.tex](docs/notas-presentacion.tex) | Notas de la presentación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
+| [docs/notas-presentacion.tex](docs/notas-presentacion.tex) | Diseño de comunicación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
 | [docs/notas-presentacion.pdf](docs/notas-presentacion.pdf) | Documento unificado compilado |
 | [docs/referencias.bib](docs/referencias.bib) | Bibliografía en formato BibLaTeX |
 
