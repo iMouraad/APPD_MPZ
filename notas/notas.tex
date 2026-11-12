@@ -25,14 +25,107 @@
 \small Repositorio del equipo: \url{https://github.com/iMouraad/APPD_MPZ}
 \end{center}
 
-\section*{Objetivo de la presentación}
+\section*{Objetivo de mi intervención}
 
-Explicar cómo el diseño de AeroAndes combina comunicación síncrona y asíncrona para evitar la sobreventa de asientos, procesar pagos, enviar notificaciones y mantener el embarque durante una desconexión.
+Explicar cómo el diseño de AeroAndes combina comunicación síncrona y asíncrona para evitar la sobreventa de asientos, procesar pagos que pueden tardar hasta 30 segundos, enviar notificaciones y mantener el embarque durante una desconexión. Los sistemas de reserva aérea dependen de componentes de cómputo, redes y terminales que deben responder a transacciones en línea \cite{airline-reservations}; por eso el diagrama separa claramente los canales de venta, el centro de datos, los sistemas externos y la red local del aeropuerto.
 
 \subsection*{1. Vista general del sistema}
 
 El pasajero puede usar la aplicación web o móvil y una agencia de viajes puede usar su propio sistema. Ambos canales llegan al \textbf{Servicio de reservas}. Este servicio coordina inventario, pagos y el estado de la reserva; no administra por sí solo la disponibilidad de los asientos.
 
-La arquitectura se divide en cuatro zonas: canales de venta, centro de datos de AeroAndes, sistemas externos y red local del aeropuerto.
+La arquitectura separa responsabilidades porque una falla parcial no debería detener todo el sistema. La confiabilidad de una aplicación distribuida depende tanto de sus componentes como de sus mecanismos de detección y recuperación de fallos \cite{distributed-reliability}.
+
+\subsection*{2. Búsqueda, retención y confirmación del asiento}
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item En \interaccion{1} e \interaccion{2}, el cliente o la agencia llama a Reservas mediante REST sobre HTTPS. La comunicación es síncrona porque necesita una respuesta para continuar.
+  \item En \interaccion{3}, Reservas consulta, retiene o confirma un asiento mediante gRPC sobre HTTP/2. Inventario es la autoridad sobre la disponibilidad.
+  \item En \interaccion{4}, Inventario actualiza la base de datos mediante SQL/TCP. La retención dura 10 minutos y la confirmación debe comprobar que la retención siga vigente y pertenezca a la misma reserva.
+  \item En \interaccion{5}, Reservas guarda el estado de la operación. Así puede responder una consulta posterior aunque el cliente haya perdido la conexión.
+\end{enumerate}
+
+\textbf{Idea clave:} dos solicitudes pueden competir por el mismo asiento, pero solo una transacción debe cambiarlo de disponible o retenido a confirmado. La consistencia fuerte se concentra en Inventario y en la base de datos; no se intenta resolver la sobreventa con mensajes asíncronos.
+
+\subsection*{3. Pago sin bloquear al cliente durante 30 segundos}
+
+En \interaccion{6}, Reservas llama a Pagos mediante gRPC y recibe en hasta 2 segundos el estado inicial del intento. Pagos registra una clave idempotente y después llama a la pasarela por HTTPS en \interaccion{7}. La pasarela puede tardar hasta 30 segundos, por lo que este trabajo continúa fuera de la solicitud original del cliente.
+
+Cuando existe un resultado, Pagos publica \texttt{pago.aprobado} o \texttt{pago.rechazado} en RabbitMQ mediante \interaccion{8}. Reservas consume el evento en \interaccion{9}. Si el pago fue aprobado, solicita a Inventario la confirmación del asiento. El evento puede llegar más de una vez; por eso Reservas debe reconocer el identificador del intento y procesarlo de forma idempotente.
+
+\textbf{Idea clave:} ``síncrono'' no significa que todo el pago termine dentro de la petición del usuario. La respuesta rápida comunica que el intento fue registrado; el resultado final llega por mensajería.
+
+\subsection*{4. Notificaciones y pase de abordar}
+
+Después de confirmar la reserva, Reservas publica \texttt{reserva.confirmada} y \texttt{pase.emitido} en \interaccion{10}. RabbitMQ entrega el trabajo a Notificaciones en \interaccion{11}; el servicio envía correo o SMS en \interaccion{12}. La cola debe ser durable para conservar el mensaje si Notificaciones está temporalmente caído.
+
+El mismo pase llega al Servidor de embarque mediante \interaccion{13}. Así se actualiza una copia local del manifiesto antes de que el pasajero llegue a la puerta.
+
+\subsection*{5. Operación del aeropuerto sin conexión al centro de datos}
+
+Los lectores de puerta y los quioscos se comunican con el Servidor de embarque mediante sockets TCP en la red local (\interaccion{15} y \interaccion{16}). La respuesta es síncrona y debe tardar menos de un segundo. Si se corta el enlace con el centro de datos, el aeropuerto valida los pases ya presentes en su manifiesto local y registra los usos pendientes.
+
+Cuando vuelve la conexión, Embarque publica \texttt{embarque.registrado} por \interaccion{14}. Los pases nuevos que no llegaron antes del corte necesitan revisión manual; el diseño no puede aceptar con seguridad datos que nunca recibió.
+
+\section*{Cómo responder las situaciones de fallo}
+
+\begin{description}[leftmargin=0pt,style=nextline,itemsep=5pt]
+  \item[F1. La pasarela no responde.] El cliente ve ``Pago en verificación''. Pagos reutiliza la misma clave al consultar o reintentar para evitar un segundo cobro. Si vence la retención antes de conocer el resultado, se libera el asiento; si luego aparece un cobro aprobado, corresponde reembolso y notificación.
+  \item[F2. Notificaciones está caído.] La reserva permanece confirmada. El evento queda pendiente en una cola durable y se entrega cuando el servicio se recupera. Debe admitirse que, si la caída dura demasiado, no se podrá garantizar el aviso en menos de un minuto.
+  \item[F3. Se pierde el enlace con el aeropuerto.] Los lectores y quioscos siguen usando el manifiesto local. El servidor registra cada uso para impedir que el mismo pase sea aceptado dos veces y sincroniza los eventos al recuperar la conexión.
+\end{description}
+
+\section*{Preguntas que probablemente recibiremos}
+
+\begin{enumerate}[leftmargin=*,itemsep=5pt]
+  \item \textbf{¿Por qué no usar REST en todas las comunicaciones?} REST/HTTPS es adecuado en los canales externos. Entre servicios internos, gRPC ofrece contratos definidos y llamadas eficientes. Para resultados tardíos y trabajo desacoplado, RabbitMQ evita mantener abierta la petición del cliente.
+  \item \textbf{¿Cómo evitan vender el mismo asiento dos veces?} Inventario es el único responsable de cambiar el estado del asiento. La confirmación usa una transacción que comprueba la reserva propietaria y la vigencia de la retención antes de actualizar.
+  \item \textbf{¿Qué ocurre si RabbitMQ entrega un mensaje repetido?} Cada evento lleva un identificador estable. El consumidor registra qué identificadores procesó y convierte la repetición en una operación sin efecto adicional.
+  \item \textbf{¿Qué sucede si el pago se aprueba después de vencer la retención?} No se confirma otro asiento automáticamente. Se verifica la situación, se tramita el reembolso y se informa al pasajero.
+  \item \textbf{¿El aeropuerto puede validar cualquier pase durante la desconexión?} No. Solo los pases que ya estén en la copia local del manifiesto. Los nuevos o modificados requieren conectividad o revisión manual.
+  \item \textbf{¿Dónde se mide el requisito de 300 ms?} Desde que el canal envía la consulta de disponibilidad hasta que recibe la respuesta, incluyendo Reservas, Inventario y la consulta a la base de datos.
+\end{enumerate}
+
+\section*{Registro de preguntas recibidas en la exposición}
+
+\begin{longtable}{@{}P{0.7cm}P{6.8cm}P{8.2cm}@{}}
+\toprule
+\textbf{N.} & \textbf{Pregunta recibida} & \textbf{Respuesta dada o corrección pendiente} \\
+\midrule
+1 & \rule{0pt}{1.2cm} & \\
+\midrule
+2 & \rule{0pt}{1.2cm} & \\
+\midrule
+3 & \rule{0pt}{1.2cm} & \\
+\midrule
+4 & \rule{0pt}{1.2cm} & \\
+\bottomrule
+\end{longtable}
+
+\section*{Preguntas para hacer a otros equipos}
+
+Elegir una o dos según el escenario presentado; no hacerlas todas.
+
+\begin{enumerate}[leftmargin=*,itemsep=5pt]
+  \item \textbf{Consistencia:} Si dos solicitudes intentan modificar el mismo recurso al mismo tiempo, ¿qué componente toma la decisión final y cómo evita un resultado duplicado?
+  \item \textbf{Tiempo de espera:} ¿Dónde definen los \textit{timeouts} y qué estado ve el usuario cuando vence el tiempo pero la operación externa podría seguir ejecutándose?
+  \item \textbf{Mensajería:} Si el broker entrega un evento dos veces, ¿qué identificador o regla hace idempotente al consumidor?
+  \item \textbf{Fallo parcial:} ¿Qué funciones siguen disponibles cuando uno de sus servicios está caído y cuáles prefieren bloquear para no comprometer los datos?
+  \item \textbf{Medición:} ¿Desde qué punto hasta qué punto miden la latencia indicada en su requisito, y cómo la comprobarían bajo carga?
+  \item \textbf{Recuperación:} Cuando vuelve la conexión después de operar sin red, ¿cómo resuelven conflictos entre los datos locales y los del servidor central?
+\end{enumerate}
+
+\begin{thebibliography}{9}
+
+\bibitem{airline-reservations}
+D. N. Chorafas, ``Airline Reservations Systems,'' en \textit{Control Systems Functions and Programming Approaches: Applications}, Mathematics in Science and Engineering, vol. 27, parte 2, Academic Press, 1966, pp. 159--176. doi: \href{https://doi.org/10.1016/S0076-5392(09)60268-X}{10.1016/S0076-5392(09)60268-X}. Disponible en ScienceDirect.
+
+\bibitem{distributed-reliability}
+W. Ahmed y Y. W. Wu, ``A survey on reliability in distributed systems,'' \textit{Journal of Computer and System Sciences}, vol. 79, no. 8, pp. 1243--1255, 2013. doi: \href{https://doi.org/10.1016/j.jcss.2013.02.006}{10.1016/j.jcss.2013.02.006}. Disponible en ScienceDirect.
+
+\end{thebibliography}
+
+\section*{Declaración de uso de inteligencia artificial}
+
+Se utilizó ChatGPT (OpenAI) como apoyo para organizar el guion, formular posibles preguntas y revisar la concordancia de las notas con el diagrama del equipo. El contenido técnico debe ser revisado y defendido por los integrantes antes de la exposición.
 
 \end{document}
