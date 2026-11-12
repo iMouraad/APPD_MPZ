@@ -74,6 +74,10 @@ Cuando vuelve la conexión, Embarque publica \texttt{embarque.registrado} por \i
   \item[F3. Se pierde el enlace con el aeropuerto.] Los lectores y quioscos siguen usando el manifiesto local. El servidor registra cada uso para impedir que el mismo pase sea aceptado dos veces y sincroniza los eventos al recuperar la conexión.
 \end{description}
 
+\subsection*{Criterios para comprobar la recuperación}
+
+Después de cada fallo no basta con que el servicio vuelva a responder. El equipo debe verificar que no existan cobros duplicados, que ningún asiento liberado aparezca confirmado, que los eventos pendientes hayan sido consumidos y que el manifiesto local coincida nuevamente con el estado central. Estas comprobaciones convierten la recuperación en un resultado observable y no solo en el reinicio de un proceso.
+
 \section*{Preguntas que probablemente recibiremos}
 
 \begin{enumerate}[leftmargin=*,itemsep=5pt]
