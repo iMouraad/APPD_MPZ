@@ -27,15 +27,15 @@ Los dos PDF para el LMS están en [entrega-final](entrega-final).
 
 | Archivo | Descripción |
 |---|---|
-| [diagrama/aeroandes-mpz.drawio](diagrama/aeroandes-mpz.drawio) | Diagrama editable de comunicación entre procesos |
+| [entrega-final/aeroandes-mpz.drawio](entrega-final/aeroandes-mpz.drawio) | Diagrama editable de comunicación entre procesos |
 | [diagrama/vista-anterior.png](diagrama/vista-anterior.png) | Vista previa anterior del diagrama |
-| [docs/notas-presentacion.tex](docs/notas-presentacion.tex) | Diseño de comunicación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
-| [docs/referencias.bib](docs/referencias.bib) | Bibliografía en formato BibLaTeX |
+| [entrega-final/notas-presentacion.tex](entrega-final/notas-presentacion.tex) | Diseño de comunicación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
+| [entrega-final/referencias.bib](entrega-final/referencias.bib) | Bibliografía en formato BibLaTeX |
 | [docs/Detalles..pdf](docs/Detalles..pdf) | Rúbrica y enunciado del escenario |
 
 ## Cómo abrir el diagrama
 
-Abre `diagrama/aeroandes-mpz.drawio` en diagrams.net o en draw.io Desktop (File → Open).
+Abre `entrega-final/aeroandes-mpz.drawio` en diagrams.net o en draw.io Desktop (File → Open).
 
 Para exportarlo de nuevo, selecciona File → Export as → PDF.
 
@@ -44,7 +44,7 @@ Para exportarlo de nuevo, selecciona File → Export as → PDF.
 Usa pdfLaTeX y Biber para generar las referencias en formato IEEE. Desde la raíz del repositorio, ejecuta:
 
 ```bash
-cd docs
+cd entrega-final
 pdflatex -halt-on-error notas-presentacion.tex
 biber notas-presentacion
 pdflatex -halt-on-error notas-presentacion.tex
