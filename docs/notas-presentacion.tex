@@ -91,7 +91,7 @@ I3 & Reservas \flecha{} Inventario. Consultar, retener y confirmar asiento.
 & RPC síncrona con gRPC sobre HTTP/2.
 & \textbf{R1–R3.} Reservas espera la decisión de Inventario antes de informar que un asiento quedó retenido o confirmado. El objetivo de 1.200 consultas por segundo y p95 menor a 300~ms \cite{enunciado} debe comprobarse desde la solicitud del cliente hasta la respuesta. \\
 \addlinespace
-I4 & Inventario \flecha{} BD. Consultar y actualizar el estado del asiento.
+I4 & Inventario \flecha{} BD. Consultar disponibilidad y actualizar el estado del asiento.
 & SQL sobre TCP, síncrona, con controlador PostgreSQL.
 & \textbf{R2, R3.} La retención vence a los 10 minutos. Al confirmar, una transacción breve comprueba que el asiento siga retenido por esa reserva y que la retención esté vigente. Si compiten dos solicitudes, solo una puede ocuparlo \cite[sec. 13.3.2]{postgres}. \\
 \addlinespace
@@ -100,7 +100,7 @@ I5 & Reservas \flecha{} BD. Guardar la reserva y su estado.
 & \textbf{R3, R4.} Guardar el estado permite responder cuando el cliente consulta qué pasó con su compra. Reservas registra la confirmación después de que Inventario acepta el cambio del asiento. \\
 \addlinespace
 I6 & Reservas \flecha{} Pagos. \texttt{IniciarPago} con reserva, monto y clave.
-& RPC síncrona con gRPC sobre HTTP/2. Objetivo de respuesta de hasta 2~s \cite{grpc}.
+& RPC síncrona con gRPC sobre HTTP/2 \cite{grpc}. Objetivo del diseño de hasta 2~s para registrar el intento.
 & \textbf{R4.} Pagos devuelve el estado inicial del intento una vez registrado. La llamada puede terminar mientras el cobro sigue en curso. \\
 \addlinespace
 I7 & Pagos \flecha{} Pasarela. Cobrar con una clave idempotente.
@@ -119,7 +119,7 @@ I10 & Reservas \flecha{} RabbitMQ. Publicar \texttt{reserva.confirmada} y \textt
 & Mensajería asíncrona con AMQP y RabbitMQ.
 & \textbf{R3, R5.} Los eventos salen después de guardar la confirmación. A partir de ellos pueden avanzar el aviso al pasajero y la actualización del manifiesto. \\
 \addlinespace
-I11 & RabbitMQ \flecha{} Notificaciones. Entregar los datos para el aviso y el pase.
+I11 & RabbitMQ \flecha{} Notificaciones. Entregar \texttt{reserva.confirmada} y \texttt{pase.emitido}.
 & Mensajería asíncrona con AMQP y RabbitMQ.
 & \textbf{R5, F2.} Una cola durable conserva el trabajo pendiente si Notificaciones se cae. El objetivo se mide hasta que el aviso llega al pasajero, en menos de un minuto después del pago. \\
 \addlinespace
@@ -145,6 +145,20 @@ I16 & Quioscos \flecha{} Embarque. Validar pase o hacer \textit{check-in}.
 \end{longtable}
 }
 
+\section*{Alternativas evaluadas}
+
+\textbf{REST/HTTPS en I1--I2 y gRPC en I3 e I6 (R1--R4).}
+Los canales externos usan una API HTTPS que pueden llamar desde el navegador, la aplicación o el sistema de una agencia. Para las llamadas internas de Inventario y Pagos también se consideró REST con JSON. Se prefirió gRPC porque el contrato de servicios y mensajes se define en Protobuf y permite generar clientes a partir de ese contrato \cite{grpc-core}. A cambio, ambos servicios deben mantener compatibles sus esquemas. Una cola para I3 obligaría a recibir por separado la decisión de Inventario, cuando el cliente necesita saber si el asiento quedó retenido en esa misma operación. El objetivo de 1.200 consultas/s y p95 menor a 300~ms requiere una prueba de carga.
+
+\textbf{Transacción SQL frente a confirmación diferida en I4 (R2, R3).}
+Un modelo que publique la confirmación y deje que cada servicio actualice su copia después abre un intervalo en el que dos solicitudes pueden ver el mismo asiento como disponible. El diseño concentra la decisión en Inventario y comprueba la vigencia y el titular dentro de una transacción breve \cite[sec. 13.3.2]{postgres}. Si Inventario no puede confirmar el cambio, Reservas mantiene la compra pendiente. Los 10 minutos son el plazo de la retención registrada en la BD.
+
+\textbf{RabbitMQ frente a una llamada HTTP directa en I8--I14 (R4, R5, F2).}
+Mantener abierta la petición original hasta que responda la pasarela trasladaría al cliente una espera de hasta 30~s. Un aviso HTTP directo de Reservas a Notificaciones también obligaría a guardar y reintentar la solicitud si ese servicio está caído. El broker permite entregar el resultado del pago y separar el envío de avisos del trámite de reserva. Para recuperar eventos se requieren colas durables, mensajes persistentes, confirmación del publicador y acuse del consumidor después de procesar. Una nueva entrega puede repetir un evento, por lo que el consumidor comprueba su identificador \cite{rabbit,confirms}. El tiempo en cola cuenta para la meta de un minuto de R5.
+
+\textbf{TCP frente a UDP en I15--I16 (R6, F3).}
+TCP entrega un flujo de bytes en orden y permite mantener abiertas las conexiones de los lectores \cite[sec. 2.2]{tcp}. Con UDP, la aplicación tendría que gestionar la pérdida de la solicitud o la respuesta, los reintentos y la identificación de duplicados. Con TCP, cada lector aún debe delimitar los mensajes, aplicar un tiempo límite y decidir qué hacer si pierde la conexión. Validar con el manifiesto local evita depender de la red externa durante el corte. El objetivo de menos de un segundo debe medirse con los 40 lectores simultáneos.
+
 \section*{Respuestas a las situaciones de fallo}
 
 \subsection*{F1. La pasarela de pagos no responde}
@@ -169,7 +183,6 @@ Los pases nuevos y los cambios que aún no llegaron requieren revisión manual. 
 
 Después de cada fallo no basta con que el servicio vuelva a responder. El equipo debe verificar que no existan cobros duplicados, que ningún asiento liberado aparezca confirmado, que los eventos pendientes hayan sido consumidos y que el manifiesto local coincida nuevamente con el estado central. Estas comprobaciones convierten la recuperación en un resultado observable y no solo en el reinicio de un proceso.
 
-\clearpage
 \section*{Declaración de uso de inteligencia artificial}
 
 Se utilizó ChatGPT (OpenAI) para organizar y revisar las notas. Se utilizó Codex (OpenAI) para preparar la tabla de interacciones y las respuestas a los fallos, verificar los enlaces de las fuentes, cotejar el texto con el diagrama e integrar los archivos en LaTeX.

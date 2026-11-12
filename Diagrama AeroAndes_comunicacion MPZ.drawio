@@ -90,8 +90,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e14" edge="1" parent="1" source="inv" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="bd" value="I4 · SQL/TCP&lt;br&gt;síncrona">
-          <mxGeometry relative="1" x="-0.0909" y="20" as="geometry">
+        <mxCell id="e14" edge="1" parent="1" source="inv" style="strokeWidth=2;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="bd" value="I4 · SQL/TCP&lt;br&gt;síncrona&lt;br&gt;consulta de&lt;br&gt;disponibilidad&lt;br&gt;actualiza asiento">
+          <mxGeometry relative="1" y="37" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
@@ -142,8 +142,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e21" edge="1" parent="1" source="mq" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="not" value="I11 · AMQP&lt;br&gt;asíncrona">
-          <mxGeometry relative="1" x="-0.0909" as="geometry">
+        <mxCell id="e21" edge="1" parent="1" source="mq" style="strokeWidth=2;dashed=1;dashPattern=8 5;fontColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="not" value="I11 · AMQP&lt;br&gt;asíncrona&lt;br&gt;confirmación&lt;br&gt;y pase emitido">
+          <mxGeometry relative="1" y="37" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
