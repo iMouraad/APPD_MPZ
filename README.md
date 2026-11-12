@@ -1,4 +1,4 @@
-  # FORM-TL-01: Taller de modelado de comunicación entre procesos distribuidos
+# FORM-TL-01: Taller de modelado de comunicación entre procesos distribuidos
 
 Universidad Técnica Estatal de Quevedo (UTEQ) · Carrera de Software
 
@@ -16,22 +16,28 @@ Escenario asignado: Escenario 1, sistema de reservas de vuelos AeroAndes Reserva
 
 Semana 2 · Entrega: 11/11/2026
 
-## Archivos de esta carpeta
+## Entrega final
+
+Los dos PDF para el LMS están en [entrega-final](entrega-final).
+
+- [Diagrama de comunicación](entrega-final/MPZ_AeroAndes_GA-TL-01_Diagrama.pdf)
+- [Documento técnico con tabla I1–I16 y respuestas F1–F3](entrega-final/MPZ_AeroAndes_GA-TL-01_Documento.pdf)
+
+## Archivos fuente
 
 | Archivo | Descripción |
 |---|---|
-| `Diagrama AeroAndes_comunicacion MPZ.drawio` | Diagrama editable de comunicación entre procesos (draw.io) |
-| `Diagrama AeroAndes_comunicacion MPZ.pdf` | Exportación del diagrama en PDF |
-| `Diagrama AeroAndes_comunicacion MPZ.png` | Exportación del diagrama en PNG a 300 DPI |
+| [diagrama/aeroandes-mpz.drawio](diagrama/aeroandes-mpz.drawio) | Diagrama editable de comunicación entre procesos |
+| [diagrama/vista-anterior.png](diagrama/vista-anterior.png) | Vista previa anterior del diagrama |
 | [docs/notas-presentacion.tex](docs/notas-presentacion.tex) | Diseño de comunicación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
-| [docs/notas-presentacion.pdf](docs/notas-presentacion.pdf) | Documento unificado compilado |
 | [docs/referencias.bib](docs/referencias.bib) | Bibliografía en formato BibLaTeX |
+| [docs/Detalles..pdf](docs/Detalles..pdf) | Rúbrica y enunciado del escenario |
 
 ## Cómo abrir el diagrama
 
-Abrir `Diagrama AeroAndes_comunicacion MPZ.drawio` en https://app.diagrams.net o en draw.io Desktop (File → Open).
+Abre `diagrama/aeroandes-mpz.drawio` en diagrams.net o en draw.io Desktop (File → Open).
 
-Para exportarlo de nuevo: File → Export as → PNG (Zoom 313 %, que equivale a unos 300 DPI) o File → Export as → PDF.
+Para exportarlo de nuevo, selecciona File → Export as → PDF.
 
 ## Cómo compilar las notas
 
