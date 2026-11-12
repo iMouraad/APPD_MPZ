@@ -23,8 +23,9 @@ Semana 2 · Entrega: 11/11/2026
 | `Diagrama AeroAndes_comunicacion MPZ.drawio` | Diagrama editable de comunicación entre procesos (draw.io) |
 | `Diagrama AeroAndes_comunicacion MPZ.pdf` | Exportación del diagrama en PDF |
 | `Diagrama AeroAndes_comunicacion MPZ.png` | Exportación del diagrama en PNG a 300 DPI |
-| `notas/notas.tex` | Notas de la presentación en LaTeX, con las preguntas recibidas y las respuestas |
-| `notas/notas.pdf` | Notas compiladas |
+| [docs/notas-presentacion.tex](docs/notas-presentacion.tex) | Notas de la presentación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
+| [docs/notas-presentacion.pdf](docs/notas-presentacion.pdf) | Documento unificado compilado |
+| [docs/referencias.bib](docs/referencias.bib) | Bibliografía en formato BibLaTeX |
 
 ## Cómo abrir el diagrama
 
@@ -34,23 +35,16 @@ Para exportarlo de nuevo: File → Export as → PNG (Zoom 313 %, que equivale a
 
 ## Cómo compilar las notas
 
-Compilador: `pdflatex`.
-
-Archivo principal: `notas/notas.tex`
-
-Desde la carpeta `notas`:
+Usa pdfLaTeX y Biber para generar las referencias en formato IEEE. Desde la raíz del repositorio, ejecuta:
 
 ```bash
-pdflatex notas.tex
-pdflatex notas.tex
+cd docs
+pdflatex -halt-on-error notas-presentacion.tex
+biber notas-presentacion
+pdflatex -halt-on-error notas-presentacion.tex
+pdflatex -halt-on-error notas-presentacion.tex
 ```
 
-O en un solo paso:
+Se requiere TeX Live o MiKTeX con Biber, `babel` en español, `geometry`, `array`, `booktabs`, `longtable`, `csquotes`, `enumitem`, `biblatex`, `biblatex-ieee`, `xurl` e `hyperref`.
 
-```bash
-latexmk -pdf notas.tex
-```
-
-Dependencias: TeX Live 2022 o superior (o MiKTeX en Windows) con los paquetes `babel` (`spanish`), `geometry`, `booktabs`, `longtable`, `xcolor`, `enumitem`, `hyperref` y `lmodern`.
-
-En Overleaf: subir `notas.tex` y elegir Compiler: pdfLaTeX en Menu → Settings.
+En Overleaf, sube `notas-presentacion.tex` y `referencias.bib` juntos y selecciona pdfLaTeX.
