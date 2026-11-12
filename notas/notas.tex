@@ -1,0 +1,38 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{array,booktabs,longtable}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{lmodern}
+
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{3em}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\interaccion}[1]{\textbf{I#1}}
+
+\begin{document}
+\begin{center}
+{\LARGE\textbf{AeroAndes Reservas: notas de presentación}\par}
+\end{center}
+
+\begin{center}
+\small Repositorio del equipo: \url{https://github.com/iMouraad/APPD_MPZ}
+\end{center}
+
+\section*{Objetivo de la presentación}
+
+Explicar cómo el diseño de AeroAndes combina comunicación síncrona y asíncrona para evitar la sobreventa de asientos, procesar pagos, enviar notificaciones y mantener el embarque durante una desconexión.
+
+\subsection*{1. Vista general del sistema}
+
+El pasajero puede usar la aplicación web o móvil y una agencia de viajes puede usar su propio sistema. Ambos canales llegan al \textbf{Servicio de reservas}. Este servicio coordina inventario, pagos y el estado de la reserva; no administra por sí solo la disponibilidad de los asientos.
+
+La arquitectura se divide en cuatro zonas: canales de venta, centro de datos de AeroAndes, sistemas externos y red local del aeropuerto.
+
+\end{document}
