@@ -29,7 +29,7 @@ Los dos PDF para el LMS están en [entrega-final](entrega-final).
 |---|---|
 | [entrega-final/aeroandes-mpz.drawio](entrega-final/aeroandes-mpz.drawio) | Diagrama editable de comunicación entre procesos |
 | [diagrama/vista-anterior.png](diagrama/vista-anterior.png) | Vista previa anterior del diagrama |
-| [entrega-final/notas-presentacion.tex](entrega-final/notas-presentacion.tex) | Diseño de comunicación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
+| [entrega-final/MPZ_AeroAndes_GA-TL-01_Documento.tex](entrega-final/MPZ_AeroAndes_GA-TL-01_Documento.tex) | Diseño de comunicación, tabla I1–I16 y respuestas F1–F3 en LaTeX |
 | [entrega-final/referencias.bib](entrega-final/referencias.bib) | Bibliografía en formato BibLaTeX |
 | [docs/Detalles..pdf](docs/Detalles..pdf) | Rúbrica y enunciado del escenario |
 
@@ -45,12 +45,12 @@ Usa pdfLaTeX y Biber para generar las referencias en formato IEEE. Desde la raí
 
 ```bash
 cd entrega-final
-pdflatex -halt-on-error notas-presentacion.tex
-biber notas-presentacion
-pdflatex -halt-on-error notas-presentacion.tex
-pdflatex -halt-on-error notas-presentacion.tex
+pdflatex -halt-on-error MPZ_AeroAndes_GA-TL-01_Documento.tex
+biber MPZ_AeroAndes_GA-TL-01_Documento
+pdflatex -halt-on-error MPZ_AeroAndes_GA-TL-01_Documento.tex
+pdflatex -halt-on-error MPZ_AeroAndes_GA-TL-01_Documento.tex
 ```
 
 Se requiere TeX Live o MiKTeX con Biber, `babel` en español, `geometry`, `array`, `booktabs`, `longtable`, `csquotes`, `enumitem`, `biblatex`, `biblatex-ieee`, `xurl` e `hyperref`.
 
-En Overleaf, sube `notas-presentacion.tex` y `referencias.bib` juntos y selecciona pdfLaTeX.
+En Overleaf, sube `MPZ_AeroAndes_GA-TL-01_Documento.tex` y `referencias.bib` juntos y selecciona pdfLaTeX.
